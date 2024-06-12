@@ -12,15 +12,16 @@
     {
         private static Random random = new Random();
         private static List<Customer> customers = new List<Customer>(
-            Enumerable.Range(1, 3).Select(idx => new Customer
+            Enumerable.Range(1, 20).Select(idx => new Customer
             {
                 Id = idx,
                 Name = $"Customer {idx}",
+                RegistrationDate = RandomDay(),
                 Orders = new List<Order>(
                     Enumerable.Range(1, 2).Select(dx => new Order
                     {
                         Id = (idx - 1) * 2 + dx,
-                        Amount = random.Next(1, 9) * 10
+                        Amount = random.Next(1, 9) * 10,
                     }))
             }));
 
@@ -41,6 +42,13 @@
             }
 
             return Ok(item);
+        }
+
+        private static DateTime RandomDay()
+        {
+            DateTime start = new DateTime(1995, 1, 1);
+            int range = (DateTime.Today - start).Days;
+            return start.AddDays(random.Next(range));
         }
     }
 }
