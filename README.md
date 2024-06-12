@@ -1,1 +1,1 @@
-# shiny-succotash
+# Shiny Succotash
